@@ -8,10 +8,14 @@ default: &default
   adapter: mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  encoding: utf8
+  reconnect: true
 
 development:
   <<: *default
-  database: ''
+  database: disertatie
+  username: antoniu
+  password:
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -22,4 +26,8 @@ test:
 
 production:
   <<: *default
-  database: ''
+  database: lrute2lr0jon6rk5
+  host: f80b6byii2vwv8cx.chr7pe7iynqr.eu-west-1.rds.amazonaws.com
+  username: r2il4wpokap5taps
+  password: dkmuv5zmf6hmzr3f
+  port: 3306
