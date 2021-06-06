@@ -3,7 +3,11 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  devise_for :users
+  devise_scope :user do
+    post '/register', to: 'users/registrations#create'
+  end
+
+  devise_for :users, path: "", controllers: {sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords"}, path_names: { sign_in: 'login', password: 'forgot', confirmation: 'confirm', unlock: 'unblock', sign_up: 'register', sign_out: 'signout'}
 
   match 'application/*args' => 'error#unhandled_request', via: :all
   match 'application' => 'error#unhandled_request', via: :all
