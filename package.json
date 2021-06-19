@@ -1,5 +1,5 @@
 {
-  "name": "disertatie_new",
+  "name": "waterplanto",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",

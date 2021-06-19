@@ -14,23 +14,6 @@
  *= require_self
  */
 
-//@import "bootstrap/scss/bootstrap"
-
-html,
-body {
-  height: 100%;
-}
-
-a, a:hover, a:focus {
-  color: #90cc03ff;
-}
-
-.btn-primary {
-  background-color: #90cc03ff;
-  border-color: #90cc03ff;
-}
-
-.btn-primary:hover, .btn-primary:focus {
-  background-color: #58ab06ff;
-  border-color: #58ab06ff;
-}
+//@import "bootstrap-icons";
+//@import "style";
+//@import "jquery-confirm";

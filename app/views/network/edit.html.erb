@@ -1,0 +1,33 @@
+<%= render partial: 'layouts/navbar' %>
+
+<div class="container bg-light mt-2 mb-4 p-4">
+  <div class="page-header mb-5">
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+        <%= link_to 'Save', 'javascript:void(0)', onclick: 'submit_form(this)', class: 'btn btn-primary' %>
+      </div>
+
+      <div class="btn-group ml-1">
+        <%= link_to 'Cancel', 'javascript:void(0)', onclick: 'cancel_form(\'/networks\')', class: 'btn btn-primary' %>
+      </div>
+    </div>
+
+    <h1>Edit network</h1>
+
+    <hr>
+  </div>
+
+  <p class="mb-5">
+    The data below is needed so we can pass it to the device when it is initially connected to us, it will be memorized and the device will connect to a permanent network.
+  </p>
+
+  <% if @exception %>
+    <div class="alert alert-danger" role="alert">
+      <%= @exception %>
+    </div>
+  <% end %>
+
+  <%= form_with url: "/network/save/#{@network.id}", id: 'edit_network_form' do %>
+    <%= render partial: 'form' %>
+  <% end %>
+</div>

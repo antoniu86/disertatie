@@ -1,0 +1,34 @@
+html,
+body {
+    height: 100%;
+}
+
+a, a:hover, a:focus {
+    color: #90cc03ff;
+}
+
+.btn-primary {
+    background-color: #90cc03ff;
+    border-color: #90cc03ff;
+}
+
+.dropdown-item:focus, .dropdown-item:active,
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: #58ab06ff;
+    border-color: #58ab06ff;
+}
+
+body {
+    background-color: #154316;
+    background-image: url("bg.png");
+}
+
+.container {}
+
+.container .page-header .pull-right {
+    float: right;
+}
+
+.navbar-right b {
+    text-transform: capitalize;
+}

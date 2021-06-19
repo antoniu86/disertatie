@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   devise_for :users, path: "", controllers: {sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords"}, path_names: { sign_in: 'login', password: 'forgot', confirmation: 'confirm', unlock: 'unblock', sign_up: 'register', sign_out: 'signout'}
 
+  match 'profile(/:username)' => 'profile#profile', via: :get
+
   match 'application/*args' => 'error#unhandled_request', via: :all
   match 'application' => 'error#unhandled_request', via: :all
 

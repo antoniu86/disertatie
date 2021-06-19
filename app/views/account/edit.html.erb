@@ -1,0 +1,27 @@
+<%= render partial: 'layouts/navbar' %>
+
+<div class="container bg-light mt-2 mb-4 p-4">
+  <div class="page-header">
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+        <%= link_to 'Save', 'javascript:void(0)', onclick: 'submit_form(this)', class: 'btn btn-primary' %>
+      </div>
+
+      <div class="btn-group ml-1">
+        <%= link_to 'Cancel', 'javascript:void(0)', onclick: 'cancel_form(\'/account\')', class: 'btn btn-primary' %>
+      </div>
+    </div>
+
+    <h1>Account</h1>
+
+    <hr>
+  </div>
+
+  <p class="mb-4">
+    Update your account information below.
+  </p>
+
+  <%= form_with url: "/account/save", id: 'edit_user_form' do %>
+    <%= render partial: 'form' %>
+  <% end %>
+</div>

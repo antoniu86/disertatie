@@ -1,0 +1,33 @@
+<table class="table table-hover">
+  <thead>
+    <th>Name</th>
+    <th width="100" class="text-right">Actions</th>
+  </thead>
+
+  <tbody>
+    <% @networks.each do |network| %>
+      <tr>
+        <td data-toggle="collapse" data-target="#accordion<%= network.id %>" class="clickable" role="button">
+          <%= network.name %>
+        </td>
+
+        <td align="right">
+          <%= link_to (image_tag "icons/pencil.svg"),  {controller: 'network', action: 'edit', id: network.id}, class: 'mr-2' %>
+          <%= link_to (image_tag "icons/trash.svg"), {controller: 'network', action: 'delete', id: network.id}, onclick: 'confirm_delete(this); return false;' %>
+        </td>
+      </tr>
+
+      <tr id="accordion<%= network.id %>" class="collapse">
+        <td colspan="2">
+          <div>
+            <b>Password:</b> <%= network.password %>
+            <br>
+            <b>Description:</b> <%= network.description %>
+            <br>
+            <b>Devices:</b> <%= network.devices.map{|device| link_to(device.name, {controller: 'device', action: 'show', id: device.id})}.join(' / ').html_safe %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

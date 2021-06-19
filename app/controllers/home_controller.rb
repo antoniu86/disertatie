@@ -1,11 +1,9 @@
 class HomeController < ApplicationController
-  before_action :check_login
+  def index
+    if user_signed_in?
+      redirect_to '/devices'
+    else
 
-  protected
-
-  def check_login
-    unless user_signed_in?
-      redirect_to "/login"
     end
   end
 end

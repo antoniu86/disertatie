@@ -1,0 +1,14 @@
+<div class="form-group">
+  <%= label_tag 'user[first_name]', 'First name:' %>
+  <%= text_field_tag 'user[first_name]', ((params[:user][:first_name] if params[:user]) || current_user&.first_name), class: 'form-control', placeholder: 'User first name' %>
+</div>
+
+<div class="form-group">
+  <%= label_tag 'user[last_name]', 'Last name:' %>
+  <%= text_field_tag 'user[last_name]', ((params[:user][:last_name] if params[:user]) || current_user&.last_name), class: 'form-control', placeholder: 'User last name' %>
+</div>
+
+<div class="form-group">
+  <%= label_tag 'user[email]', 'E-mail:' %>
+  <%= email_field_tag 'user[email]', ((params[:user][:email] if params[:user]) || current_user&.email), class: 'form-control', placeholder: 'User e-mail' %>
+</div>

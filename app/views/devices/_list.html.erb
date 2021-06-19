@@ -1,0 +1,67 @@
+<table class="table table-hover">
+  <thead>
+    <th>Name</th>
+    <th width="100" class="text-center">Status</th>
+    <th width="150" class="text-right">Actions</th>
+  </thead>
+
+  <tbody>
+    <% @devices.each do |device| %>
+      <tr>
+        <td data-toggle="collapse" data-target="#accordion<%= device.id %>" class="clickable" role="button">
+          <%= device.name %>
+        </td>
+
+        <td align="center">
+          <% if device.connected? %>
+            <%= icon 'bi-check-circle' %>
+          <% else %>
+            <%= icon 'bi-x-circle' %>
+          <% end %>
+        </td>
+
+        <td align="right">
+          <%= link_to (image_tag "icons/card-list.svg"),  {controller: 'device', action: 'show', id: device.id}, class: 'mr-2' %>
+          <%= link_to (image_tag "icons/pencil.svg"),  {controller: 'device', action: 'edit', id: device.id}, class: 'mr-2' %>
+          <%= link_to (image_tag "icons/trash.svg"), {controller: 'device', action: 'delete', id: device.id}, onclick: 'confirm_delete(this); return false;', class: 'mr-2' %>
+
+          <% if device.connected? %>
+            <% if device.marked_to_water? %>
+              <%= link_to (image_tag "icons/stop-circle.svg"), {controller: 'device', action: 'unmark_to_water', id: device.id}, onclick: "confirm_unmark_to_water(this, '#{device.watered_at}'); return false;" %>
+            <% else %>
+              <%= link_to (image_tag "icons/water.svg"), {controller: 'device', action: 'mark_to_water', id: device.id}, onclick: "confirm_mark_to_water(this, '#{device.watered_at}'); return false;" %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr id="accordion<%= device.id %>" class="collapse">
+        <td colspan="3">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <b>Product code:</b> <%= device.code %>
+                <br>
+                <b>Network:</b> <%= device.network.name %>
+                <br>
+                <b>Water at soil humidity of:</b> <%= device.water_at %>
+                <br>
+                <b>Description:</b> <%= device.description %>
+              </div>
+
+              <div class="col">
+                <b>Soil humidity:</b> <%= device.humidity %>
+                <br>
+                <b>Water level:</b> <%= device.level %>
+                <br>
+                <b>Temperature:</b> <%= device.temperature %>
+                <br>
+                <b>Last watered at:</b> <%= device.watered_at %>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,6 +1,35 @@
 <%= render partial: 'layouts/navbar' %>
 
-<h2>Hello World</h2>
-<p>
-  HOME The time is now: <%= Time.now %>
-</p>
+<div class="container bg-light mt-2 mb-4 p-4">
+  <div class="page-header">
+    <% if current_user.has_networks? %>
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group">
+          <a href="#" class="btn btn-primary">Add</a>
+        </div>
+      </div>
+    <% end %>
+
+    <h1>Devices</h1>
+
+    <hr>
+  </div>
+
+  <p>
+    Bellow are your devices:
+  </p>
+
+  <% unless current_user.has_networks? %>
+    <div class="alert alert-danger" role="alert">
+      Before adding a device your need to first add a network! Please add one from <a href="/networks">here</a>.
+    </div>
+  <% else %>
+    <% if current_user.devices.empty? %>
+      <div class="alert alert-warning" role="alert">
+        You have no devices added to your account! Please add one.
+      </div>
+    <% else %>
+      <%= render partial: 'devices/list' %>
+    <% end %>
+  <% end %>
+</div>

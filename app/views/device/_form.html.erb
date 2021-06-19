@@ -1,0 +1,28 @@
+<div class="form-group">
+  <%= label_tag 'device[name]', 'Name:' %>
+  <%= text_field_tag 'device[name]', ((params[:device][:name] if params[:device]) || @device&.name), class: 'form-control', placeholder: 'The device name' %>
+</div>
+
+<div class="form-group">
+  <%= label_tag 'device[code]', 'Product code:' %>
+  <%= text_field_tag 'device[code]', ((params[:device][:code] if params[:device]) || @device&.code), class: 'form-control', placeholder: 'The device code' %>
+  <small id="emailHelp" class="form-text text-muted">This is found one the bottom of the product. It is a 12 characters code.</small>
+</div>
+
+<div class="form-group">
+  <%= label_tag 'device[description]', 'Description:' %>
+  <%= text_area_tag 'device[description]', ((params[:device][:description] if params[:device]) || @device&.description), class: 'form-control', placeholder: 'A device description' %>
+  <small id="emailHelp" class="form-text text-muted">This might be helpful if you have more devices with specific information about them.</small>
+</div>
+
+<div class="form-group">
+  <%= label_tag 'device[water_at]', 'Water at soil humidity of:' %>
+  <%= select_tag 'device[water_at]', options_for_select((10..40), selected: ((params[:device][:water_at] if params[:device]) || @device&.water_at || 20)), class: 'form-control' %>
+  <small id="emailHelp" class="form-text text-muted">Please keep in mind that if you don't set a proper value the device won't properly water or will use all the water from start.</small>
+</div>
+
+<div class="form-group">
+  <%= label_tag 'device[network_id]', 'Network:' %>
+  <%= select_tag 'device[network_id]', options_for_select(current_user.networks.map{|network| [network.name, network.id]}, selected: ((params[:device][:network_id] if params[:device]) || @device&.network_id)), class: 'form-control', include_blank: "Select network:" %>
+  <small id="emailHelp" class="form-text text-muted">This will be sent to the device and saved on it so it will know to which network to connect.</small>
+</div>
