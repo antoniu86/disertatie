@@ -2,7 +2,7 @@
 require_relative 'application'
 
 ActionMailer::Base.smtp_settings = {
-  :port           => 465,
+  :port           => 25,
   :address        => 'mail.tonydesign.ro',
   :user_name      => 'test@tonydesign.ro',
   :password       => 'fFg0%0d$zj2F',
