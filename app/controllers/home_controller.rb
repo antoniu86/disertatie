@@ -1,9 +1,13 @@
 class HomeController < ApplicationController
   def index
-    if user_signed_in?
-      redirect_to '/devices'
-    else
-      render layout: false
-    end
+    render layout: false
+  end
+
+  def terms
+    render layout: false
+  end
+
+  def privacy
+    render layout: false
   end
 end
