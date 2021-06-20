@@ -10,7 +10,9 @@ class AlexaApiController < ApplicationController
   # get - check plants
 
   def check_plants
+    logger.info "@user = #{@user.inspect}"
     devices = @user.devices
+    logger.info "devices = #{devices.inspect}"
     list = []
     count = 0
 
