@@ -33,13 +33,13 @@ class AlexaApiController < ApplicationController
 
     unless device_name = params[:slots][:name]
       render json: {status: false, message: 'Missing parameter on request'}, status: :ok
+    else
+      unless device = @user.devices.where(name: device_name).first
+        render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
+      else
+        render json: {status: true, message: "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%"}, status: :ok
+      end
     end
-
-    unless device = @user.devices.where(name: device_name).first
-      render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
-    end
-
-    render json: {status: true, message: "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%"}, status: :ok
   end
 
   # post - water plant
@@ -49,15 +49,15 @@ class AlexaApiController < ApplicationController
 
     unless device_name = params[:slots][:name]
       render json: {status: false, message: 'Missing parameter on request'}, status: :ok
+    else
+      unless device = @user.devices.where(name: device_name).first
+        render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
+      else
+        device.mark_to_water
+
+        render json: {status: true, message: "We will water your plant soon"}, status: :ok
+      end
     end
-
-    unless device = @user.devices.where(name: device_name).first
-      render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
-    end
-
-    device.mark_to_water
-
-    render json: {status: true, message: "We will water your plant soon"}, status: :ok
   end
 
   protected
