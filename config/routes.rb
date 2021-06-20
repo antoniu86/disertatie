@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   match 'alexa/grant' => 'alexa_authorize#grant', via: :all
   match 'alexa/token' => 'alexa_authorize#token', via: :all
 
+  # terms and privacy
+  match 'terms' => 'home#index', via: :all
+  match 'privacy' => 'home#index', via: :all
+
   match 'application/*args' => 'error#unhandled_request', via: :all
   match 'application' => 'error#unhandled_request', via: :all
 
