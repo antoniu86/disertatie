@@ -88,6 +88,12 @@
   <p>If you want to connect with Alexa you need to generate a login key below. The keys are valid for 1 hour.</p>
   <p>Your Alexa key is: <b><%= current_user.get_alexa_login_key || 'You need to generate a key' %></b></p>
 
+  <% if current_user.alexa_token && params[:debug] == 'true' %>
+    <p>Alexa token: <b><%= current_user.alexa_token.alexa_token %></b></p>
+    <p>Alexa access: <b><%= current_user.alexa_token.access %></b></p>
+    <p>Alexa refresh: <b><%= current_user.alexa_token.refresh %></b></p>
+  <% end %>
+
   <%= form_with url: "/account/generate_alexa_key", id: 'alexa_key_form', class: 'form-inline mb-5' do %>
     <button type="submit" class="btn btn-primary mb-2">Generate</button>
   <% end %>
