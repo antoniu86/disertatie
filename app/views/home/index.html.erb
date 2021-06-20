@@ -1,35 +1,226 @@
-<%= render partial: 'layouts/navbar' %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="container bg-light mt-2 mb-4 p-4">
-  <div class="page-header">
-    <% if current_user.has_networks? %>
-      <div class="btn-toolbar pull-right">
-        <div class="btn-group">
-          <a href="#" class="btn btn-primary">Add</a>
-        </div>
-      </div>
-    <% end %>
+  <title>WaterPlanto</title>
 
-    <h1>Devices</h1>
+  <meta name="author" content="Antoniu Mihai Temian">
 
-    <hr>
-  </div>
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= image_path "favicon/apple-touch-icon.png" %>">
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= image_path "favicon/favicon-32x32.png" %>">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= image_path "favicon/favicon-16x16.png" %>">
+  <link rel="manifest" href="<%= image_path "favicon/site.webmanifest" %>">
+  <link rel="mask-icon" href="<%= image_path "favicon/safari-pinned-tab.svg" %>" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
 
-  <p>
-    Bellow are your devices:
-  </p>
+  <!-- Bootstrap Core CSS-->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS-->
+  <link href="/css/universal.css" rel="stylesheet">
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" class="top">
 
-  <% unless current_user.has_networks? %>
-    <div class="alert alert-danger" role="alert">
-      Before adding a device your need to first add a network! Please add one from <a href="/networks">here</a>.
-    </div>
-  <% else %>
-    <% if current_user.devices.empty? %>
-      <div class="alert alert-warning" role="alert">
-        You have no devices added to your account! Please add one.
-      </div>
-    <% else %>
-      <%= render partial: 'devices/list' %>
-    <% end %>
-  <% end %>
+<!-- Preloader-->
+<div id="preloader">
+  <div id="status"></div>
 </div>
+
+<!-- Navigation-->
+<nav class="navbar navbar-universal navbar-custom navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" data-toggle="collapse" data-target=".navbar-main-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#page-top" class="navbar-brand page-scroll">
+      <!-- Text or Image logo-->WaterPlanto</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-main-collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li class="hidden"><a href="#page-top"></a></li>
+        <li><%= link_to "Sign in", new_session_path(User.new) %></li>
+        <li class="menu-divider visible-lg">&nbsp;</li>
+        <li><%= link_to "Sign up", new_registration_path(User.new) %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header-->
+<header class="solid-color3 intro">
+  <!-- Intro Header-->
+  <div class="intro-body">
+    <p><img src="/img/logo.svg" width="200" alt=""></p>
+    <h1><span class="rotate">
+            Smart,
+            Easy to use,
+            Secure,
+            User friendly,
+            WaterPlanto</span></h1>
+    <div data-wow-delay="1s" class="scroll-btn hidden-xs wow fadeInDown"><a href="#about" class="page-scroll"><span class="mouse"><span class="weel"><span></span></span></span></a></div>
+  </div>
+</header>
+
+<!-- About Section-->
+<section id="about2" class="bg-gray">
+  <div class="container wow fadeIn">
+    <div class="row">
+      <div class="col">
+        <h3>We have magic</h3>
+        <p>Universal easily and efficiently scales your project with one code base. Amazing solution for portfolio websites which you can fit for freelancers, photographers or agency showcase.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section-->
+<section id="services" class="bg-img4 text-center">
+  <div class="overlay"></div>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2">
+        <h3>Our Services</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis pulvinar vestibulum. Doneceleifend, sem sed dictum. Lorem ipsum dolor sit amet, consectetur adipiscing elits</p>
+      </div>
+    </div>
+    <div class="row">
+      <div data-wow-delay=".2s" class="col-lg-4 col-sm-6 wow fadeIn">
+        <h4><i class="icon icon-big ion-ios-analytics-outline"></i> ANALITICS</h4>
+        <p>Lorem ipsum dolor sit amet. Con eleifend sem sed dictum mattis sectetur elit. Nulla convallis pul.</p>
+      </div>
+      <div data-wow-delay=".4s" class="col-lg-4 col-sm-6 wow fadeIn">
+        <h4><i class="icon icon-big ion-ios-pie-outline"></i> DESIGN</h4>
+        <p>Lorem ipsum dolor sit amet. Con eleifend sem sed dictum mattis sectetur elit. Nulla convallis pul.</p>
+      </div>
+      <div data-wow-delay=".6s" class="col-lg-4 col-sm-6 wow fadeIn">
+        <h4><i class="icon icon-big ion-ios-stopwatch-outline"></i> CONSULTING</h4>
+        <p>Lorem ipsum dolor sit amet. Con eleifend sem sed dictum mattis sectetur elit. Nulla convallis pul.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Subscribe Section-->
+<section id="subscribe" class="section-small bg-img5 text-center">
+  <div class="overlay-white"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-offset-2">
+        <h3>Subscribe</h3>
+        <h5>Sign-Up For News Updates and Alerts</h5>
+        <!-- MailChimp Signup Form - Replace the form action in the line below with your MailChimp embed action! For more information on how to do this please visit the Docs!-->
+        <form id="mc-embedded-subscribe-form" action="http://forbetterweb.us11.list-manage.com/subscribe/post?u=4f751a6c58b225179404715f0&amp;id=18fc72763a" method="post" name="mc-embedded-subscribe-form" target="_blank" novalidate="" class="form-inline subscribe-form">
+          <div class="input-group input-group-lg">
+            <input id="mce-EMAIL" type="email" name="EMAIL" placeholder="Email address..." class="form-control"><span class="input-group-btn">
+                  <button id="mc-embedded-subscribe" type="submit" name="subscribe" class="btn btn-dark">Subscribe</button></span>
+            <div id="mce-responses"></div>
+            <div id="mce-error-response" style="display:none" class="response"></div>
+            <div id="mce-success-response" style="display:none" class="response"></div>
+          </div>
+        </form>
+        <!-- End MailChimp Signup Form--><img src="img/misc/mailchimp.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quotes-->
+<section class="quote section-small bg-img3 text-center">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <p><i class="icon fa fa-quote-left fa-lg"></i></p>
+        <p>Teach self-denial and make its practice pleasure, and you can create for the world a destiny more sublime that ever issued from the brain of the wildest dreamer.</p>
+        <h2 class="no-pad classic">Sir Walter Scott</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section-->
+<section id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>Say hello</h3>
+        <!-- Contact Form - Enter your email address on line 17 of the mail/contact_me.php file to make this form work. For more information on how to do this please visit the Docs!-->
+        <form id="contactForm" name="sentMessage" novalidate="">
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label for="name" class="sr-only control-label">You Name</label>
+              <input id="name" type="text" placeholder="You Name" required="" data-validation-required-message="Please enter name" class="form-control input-lg"><span class="help-block text-danger"></span>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label for="email" class="sr-only control-label">You Email</label>
+              <input id="email" type="email" placeholder="You Email" required="" data-validation-required-message="Please enter email" class="form-control input-lg"><span class="help-block text-danger"></span>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label for="phone" class="sr-only control-label">You Phone</label>
+              <input id="phone" type="tel" placeholder="You Phone" required="" data-validation-required-message="Please enter phone number" class="form-control input-lg"><span class="help-block text-danger"></span>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label for="message" class="sr-only control-label">Message</label>
+              <textarea id="message" rows="2" placeholder="Message" required="" data-validation-required-message="Please enter a message." aria-invalid="false" class="form-control input-lg"></textarea><span class="help-block text-danger"></span>
+            </div>
+          </div>
+          <div id="success"></div>
+          <button type="submit" class="btn btn-dark">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer Section-->
+<section class="section-small footer bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <h5>About</h5>
+        <p>Thanks for choosing Universal for your next project! Universal is a unique template for building  beautiful business website. We have a dedicated support team ready to answer your questions.</p>
+      </div>
+      <div class="col-sm-4 text-right">
+        <h5>Total Devices</h5><span data-min="0" data-max="<%= Device.count %>" data-delay="1" data-increment="1" class="numscroller">0</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- jQuery-->
+<script src="/js/jquery-1.12.4.min.js"></script>
+
+<!-- Bootstrap Core JavaScript-->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript-->
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.countdown.min.js"></script>
+<script src="/js/device.min.js"></script>
+<script src="/js/form.min.js"></script>
+<script src="/js/jquery.placeholder.min.js"></script>
+<script src="/js/jquery.shuffle.min.js"></script>
+<script src="/js/jquery.parallax.min.js"></script>
+<script src="/js/jquery.circle-progress.min.js"></script>
+<script src="/js/jquery.swipebox.min.js"></script>
+<script src="/js/smoothscroll.min.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/jquery.smartmenus.js"></script>
+<script src="/js/text-rotator.min.js"></script>
+
+<!-- Custom Theme JavaScript-->
+<script src="/js/universal.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</body>
+</html>
