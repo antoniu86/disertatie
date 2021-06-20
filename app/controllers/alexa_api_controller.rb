@@ -64,7 +64,7 @@ class AlexaApiController < ApplicationController
   # validate the request
 
   def validate_request
-    logger.info "Request headers: #{request.headers.inspect}"
+    #logger.info "Request headers: #{request.headers.inspect}"
 
     if ((authorization = request.headers['Authorization']) && authorization.include?('Bearer'))
       token = request.headers['Authorization'].gsub('Bearer ', '')
