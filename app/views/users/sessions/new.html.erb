@@ -1,5 +1,5 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-signin'}) do |f| %>
-  <%= image_tag 'logo.svg', width: 72, height: 72, class: 'mb-4' %>
+  <%= link_to (image_tag 'logo.svg', width: 72, height: 72, class: 'mb-4'), '/' %>
   <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
 
   <label for="user_email" class="sr-only">Email address</label>
