@@ -26,8 +26,8 @@ test:
 
 production:
   <<: *default
-  database: lrute2lr0jon6rk5
-  host: f80b6byii2vwv8cx.chr7pe7iynqr.eu-west-1.rds.amazonaws.com
-  username: r2il4wpokap5taps
-  password: dkmuv5zmf6hmzr3f
+  database: <%= ENV['DATABASE'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   port: 3306
