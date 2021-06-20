@@ -10,9 +10,7 @@ class AlexaApiController < ApplicationController
   # get - check plants
 
   def check_plants
-    logger.info "@user = #{@user.inspect}"
     devices = @user.devices
-    logger.info "devices = #{devices.inspect}"
     list = []
     count = 0
 
@@ -21,6 +19,7 @@ class AlexaApiController < ApplicationController
     else
       devices.each do |device|
         list << "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%; "
+        count = count + 1
       end
 
       render json: {count: count, list: list}, status: :ok
@@ -66,8 +65,6 @@ class AlexaApiController < ApplicationController
   # validate the request
 
   def validate_request
-    #logger.info "Request headers: #{request.headers.inspect}"
-
     if ((authorization = request.headers['Authorization']) && authorization.include?('Bearer'))
       token = request.headers['Authorization'].gsub('Bearer ', '')
       logger.info "Request token: #{token}"
