@@ -6,7 +6,7 @@ ActionMailer::Base.smtp_settings = {
   :address        => 'mail.tonydesign.ro',
   :user_name      => 'test@tonydesign.ro',
   :password       => 'fFg0%0d$zj2F',
-  :domain         => 'waterplanto.heroku.com',
+  :domain         => 'tonydesign.ro',
   :authentication => :plain,
 }
 ActionMailer::Base.delivery_method = :smtp
