@@ -189,11 +189,14 @@
 <section class="section-small footer bg-gray">
   <div class="container">
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-6">
         <h5>About</h5>
         <p>Thanks for choosing Universal for your next project! Universal is a unique template for building  beautiful business website. We have a dedicated support team ready to answer your questions.</p>
       </div>
-      <div class="col-sm-4 text-right">
+      <div class="col-sm-3 text-right">
+        <h5>Total Users</h5><span data-min="0" data-max="<%= User.count %>" data-delay="1" data-increment="1" class="numscroller">0</span>
+      </div>
+      <div class="col-sm-3 text-right">
         <h5>Total Devices</h5><span data-min="0" data-max="<%= Device.count %>" data-delay="1" data-increment="1" class="numscroller">0</span>
       </div>
     </div>

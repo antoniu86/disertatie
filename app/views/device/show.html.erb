@@ -6,6 +6,10 @@
       <div class="btn-group ml-1">
         <%= link_to "#{icon 'bi-arrow-up'} Back".html_safe, '/devices', class: 'btn btn-primary' %>
       </div>
+
+      <div class="btn-group ml-1">
+        <%= link_to "#{icon 'bi-'} Edit".html_safe, "/device/edit/#{params[:id]}", class: 'btn btn-primary' %>
+      </div>
     </div>
 
     <h1><%= @device.name %></h1>
@@ -30,7 +34,7 @@
       </div>
 
       <div class="col">
-        <b>Soil humidity:</b> <%= @device.humidity %>
+        <b>Soil humidity:</b> <%= @device.soil_humidity %>%
         <br>
         <b>Water level:</b> <%= @device.level %>
         <br>

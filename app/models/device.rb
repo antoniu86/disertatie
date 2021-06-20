@@ -11,8 +11,13 @@ class Device < ApplicationRecord
   # validations
   validates :name, presence: true
   validates :code, presence: true, length: { is: 12 }
-  validates :water_at, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 40 }
   validates :network_id, presence: true
+
+  # soil humidity
+
+  def soil_humidity
+    (humidity/50)*100
+  end
 
   # check connected
 
