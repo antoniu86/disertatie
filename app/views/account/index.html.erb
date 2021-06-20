@@ -81,6 +81,17 @@
     <button type="submit" class="btn btn-primary mb-2 ml-5" onclick="ajax_submit_public_profile(this, event)">Save</button>
   <% end %>
 
+  <h2>Alexa</h2>
+
+  <hr>
+
+  <p>If you want to connect with Alexa you need to generate a login key below. The keys are valid for 1 hour.</p>
+  <p>Your Alexa key is: <b><%= current_user.get_alexa_login_key || 'You need to generate a key' %></b></p>
+
+  <%= form_with url: "/account/generate_alexa_key", id: 'alexa_key_form', class: 'form-inline mb-5' do %>
+    <button type="submit" class="btn btn-primary mb-2">Generate</button>
+  <% end %>
+
   <h2>Delete account</h2>
 
   <hr>

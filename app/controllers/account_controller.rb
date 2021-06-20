@@ -64,6 +64,13 @@ class AccountController < ApplicationController
     end
   end
 
+  # alexa
+
+  def generate_alexa_key
+    current_user.generate_alexa_login_key
+    redirect_to '/account'
+  end
+
   # delete
 
   def delete

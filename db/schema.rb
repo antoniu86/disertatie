@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_19_164655) do
+ActiveRecord::Schema.define(version: 2021_06_20_111623) do
+
+  create_table "alexa_login_keys", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "login_key", limit: 10, null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["login_key"], name: "index_alexa_login_keys_on_login_key", unique: true
+    t.index ["user_id"], name: "index_alexa_login_keys_on_user_id", unique: true
+  end
+
+  create_table "alexa_tokens", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "authentication", null: false
+    t.string "access"
+    t.string "refresh"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["authentication"], name: "index_alexa_tokens_on_authentication", unique: true
+    t.index ["user_id"], name: "index_alexa_tokens_on_user_id", unique: true
+  end
 
   create_table "devices", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", default: "", null: false

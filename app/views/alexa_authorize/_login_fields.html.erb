@@ -1,0 +1,14 @@
+<%= hidden_field_tag :client_id, params[:client_id] %>
+<%= hidden_field_tag :response_type, params[:response_type] %>
+<%= hidden_field_tag :state, params[:state] %>
+<%= hidden_field_tag :redirect_uri, params[:redirect_uri] %>
+
+<p>
+  <%= label_tag "alexa_login_key", "Enter Alexa login :", class: 'sr-only' %><br/>
+  <%= text_field_tag "alexa_login_key", nil, class: 'form-control text-center', placeholder: 'Enter Alexa key here' %>
+</p>
+
+<button class="btn btn-lg btn-primary btn-block mb-4" type="submit">Login</button>
+
+<p class="small-text">To generate one, please login into your account and generate one from the account page which is valid for 1 hour.</p>
+
