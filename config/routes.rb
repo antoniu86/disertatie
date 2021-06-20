@@ -11,6 +11,11 @@ Rails.application.routes.draw do
 
   match 'profile(/:username)' => 'profile#profile', via: :get
 
+  # authorize
+  match 'alexa/authorize' => 'alexa_authorize#login', via: :all
+  match 'alexa/grant' => 'alexa_authorize#grant', via: :all
+  match 'alexa/token' => 'alexa_authorize#token', via: :all
+
   match 'application/*args' => 'error#unhandled_request', via: :all
   match 'application' => 'error#unhandled_request', via: :all
 
