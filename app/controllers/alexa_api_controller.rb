@@ -87,6 +87,24 @@ class AlexaApiController < ApplicationController
     end
   end
 
+  # get - water plants
+
+  def water_plants
+    devices = @user.devices
+    count = 0
+
+    if devices.empty?
+      render json: {status: false, message: "There are no devices"}, status: :ok
+    else
+      devices.each do |device|
+        device.mark_to_water
+        count = count + 1
+      end
+
+      render json: {status: true, message: "#{count} devices will water the plants shortly"}, status: :ok
+    end
+  end
+
   # post - water plant
 
   def water_plant
