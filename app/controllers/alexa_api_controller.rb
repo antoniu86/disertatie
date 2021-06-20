@@ -7,7 +7,7 @@ class AlexaApiController < ApplicationController
   before_action :log_request
   before_action :validate_request
 
-  # get
+  # get - check plants
 
   def check_plants
     devices = @user.devices
@@ -18,11 +18,45 @@ class AlexaApiController < ApplicationController
       render json: {count: count}, status: :ok
     else
       devices.each do |device|
-        list << "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%"
+        list << "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%; "
       end
 
       render json: {count: count, list: list}, status: :ok
     end
+  end
+
+  # post - check plant
+
+  def check_plant
+    params.permit!
+
+    unless device_name = params[:slots][:name]
+      render json: {status: false, message: 'Missing parameter on request'}, status: :ok
+    end
+
+    unless device = @user.devices.where(name: device_name).first
+      render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
+    end
+
+    render json: {status: true, message: "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%"}, status: :ok
+  end
+
+  # post - water plant
+
+  def water_plant
+    params.permit!
+
+    unless device_name = params[:slots][:name]
+      render json: {status: false, message: 'Missing parameter on request'}, status: :ok
+    end
+
+    unless device = @user.devices.where(name: device_name).first
+      render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
+    end
+
+    device.mark_to_water
+
+    render json: {status: true, message: "We will water your plant soon"}, status: :ok
   end
 
   protected
