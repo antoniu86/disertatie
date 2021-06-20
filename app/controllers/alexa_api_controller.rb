@@ -37,7 +37,52 @@ class AlexaApiController < ApplicationController
       unless device = @user.devices.where(name: device_name).first
         render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
       else
-        render json: {status: true, message: "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%"}, status: :ok
+        message = "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%, "
+
+        if device.watered_at
+          message = message + " the device last watered at #{device.watered_at}"
+        else
+          message = message + " the device was never started"
+        end
+        render json: {status: true, message: message}, status: :ok
+      end
+    end
+  end
+
+  # post - check plant description
+
+  def check_plant_description
+    params.permit!
+
+    unless device_name = params[:slots][:name]
+      render json: {status: false, message: 'Missing parameter on request'}, status: :ok
+    else
+      unless device = @user.devices.where(name: device_name).first
+        render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
+      else
+        message = (device.description.empty? ? "The device #{device_name} has no description" : "The device description is: #{device.description}")
+        render json: {status: true, message: message}, status: :ok
+      end
+    end
+  end
+
+  # post - set plant minimum humidity
+
+  def set_plant_humidity
+    params.permit!
+
+    unless ((device_name = params[:slots][:name]) && (device_water_at = params[:slots][:water_at].to_i))
+      render json: {status: false, message: 'Missing parameter on request'}, status: :ok
+    else
+      unless device = @user.devices.where(name: device_name).first
+        render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
+      else
+        if device_water_at > 50
+          render json: {status: false, message: "You cannot have a higher value than 50%"}, status: :ok
+        else
+          device.update(:water_at, device_water_at)
+          render json: {status: true, message: "The minimum level of soil humidity was changed to #{device_water_at}% for #{device_name}"}, status: :ok
+        end
       end
     end
   end
