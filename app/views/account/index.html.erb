@@ -89,7 +89,7 @@
   <p>Your Alexa key is: <b><%= current_user.get_alexa_login_key || 'You need to generate a key' %></b></p>
 
   <% if current_user.alexa_token && params[:debug] == 'true' %>
-    <p>Alexa token: <b><%= current_user.alexa_token.alexa_token %></b></p>
+    <p>Alexa token: <b><%= current_user.alexa_token.authentication %></b></p>
     <p>Alexa access: <b><%= current_user.alexa_token.access %></b></p>
     <p>Alexa refresh: <b><%= current_user.alexa_token.refresh %></b></p>
   <% end %>
