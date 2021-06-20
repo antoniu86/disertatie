@@ -80,7 +80,7 @@ class AlexaApiController < ApplicationController
         if device_water_at > 50
           render json: {status: false, message: "You cannot have a higher value than 50%"}, status: :ok
         else
-          device.update(:water_at, device_water_at)
+          device.update(water_at: device_water_at)
           render json: {status: true, message: "The minimum level of soil humidity was changed to #{device_water_at}% for #{device_name}"}, status: :ok
         end
       end
