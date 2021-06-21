@@ -23,7 +23,7 @@ class DeviceApiController < ApplicationController
       level = params[:level] || 0
       temperature = params[:temperature] || 0
 
-      updates = {humidity: humidity, level: level, temperature: temperature, water: false}
+      updates = {status: true, humidity: humidity, level: level, temperature: temperature, water: false}
 
       ci, sq, tr, key = Device.generate_key
 
