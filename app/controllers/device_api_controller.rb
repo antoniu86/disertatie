@@ -11,7 +11,7 @@ class DeviceApiController < ApplicationController
 
   def update
     unless @valid_key
-      render plain: "{\"status\": -2}"
+      render plain: "antoniu are mere"
       return
     end
 
