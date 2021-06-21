@@ -11,7 +11,7 @@ class DeviceApiController < ApplicationController
 
   def update
     unless @valid_key
-      render json: {status: -2}.to_json, status: :ok
+      render plain: "{\"status\": -2}"
       return
     end
 
