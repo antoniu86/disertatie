@@ -7,6 +7,8 @@ class AlexaApiController < ApplicationController
   before_action :log_request
   before_action :validate_request
 
+  after_action :close_database_connection
+
   # get - check plants
 
   def check_plants
@@ -142,5 +144,12 @@ class AlexaApiController < ApplicationController
 
   def log_request
     logger.info "request params: #{params.inspect}"
+  end
+
+  # close database connection
+
+  def close_database_connection
+    logger.info "Closing DB connection"
+    ActiveRecord::Base.connection.close
   end
 end

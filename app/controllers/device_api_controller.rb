@@ -7,6 +7,8 @@ class DeviceApiController < ApplicationController
   before_action :log_request
   before_action :validate_request
 
+  after_action :close_database_connection
+
   def update
     unless (device = Device.where(code: params[:code]).first)
       Log.create(user_id: 0, device_id: 0, content: {code: params[:code], message: 'no device registered with this code'}.to_json)
@@ -60,5 +62,12 @@ class DeviceApiController < ApplicationController
 
   def log_request
     logger.info "request params: #{params.inspect}"
+  end
+
+  # close database connection
+
+  def close_database_connection
+    logger.info "Closing DB connection"
+    ActiveRecord::Base.connection.close
   end
 end
