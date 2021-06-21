@@ -7,16 +7,16 @@ class DeviceApiController < ApplicationController
   before_action :log_request
   before_action :validate_request
 
+  after_action :close_database_connection
+
   def update
     unless @valid_key
-      #close_database_connection
-      render json: {status: -2}.to_json, status: :ok
+      render plain: "antoniu are mere"
       return
     end
 
     unless (device = Device.where(code: params[:code]).first)
       Log.create(user_id: 0, device_id: 0, content: {code: params[:code], message: 'no device registered with this code'}.to_json)
-      close_database_connection
       render json: {status: 0}.to_json, status: :ok
     else
       humidity = params[:humidity] || 0
@@ -36,10 +36,8 @@ class DeviceApiController < ApplicationController
       end
 
       if device.update(updates)
-        close_database_connection
         render json: {status: 1, ci: ci, sq: sq, tr: tr, key: key, netname: device.network.name, netpass: device.network.password, water: to_water, limit: device.water_at}.to_json, status: :ok
       else
-        close_database_connection
         render json: {status: -1}.to_json, status: :ok
       end
     end
