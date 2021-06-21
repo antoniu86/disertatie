@@ -9,7 +9,7 @@ class DeviceApiController < ApplicationController
 
   def update
     unless @valid_key
-      close_database_connection
+      #close_database_connection
       render json: {status: -2}.to_json, status: :ok
       return
     end
