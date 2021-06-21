@@ -10,6 +10,11 @@ class DeviceApiController < ApplicationController
   after_action :close_database_connection
 
   def update
+    unless @valid_key
+      render json: {status: -2}, status: :ok
+      return
+    end
+
     unless (device = Device.where(code: params[:code]).first)
       Log.create(user_id: 0, device_id: 0, content: {code: params[:code], message: 'no device registered with this code'}.to_json)
       render json: {status: 0}, status: :ok
@@ -43,7 +48,10 @@ class DeviceApiController < ApplicationController
   # validate the request
 
   def validate_request
+    @valid_key = false
+
     logger.info "Token header: #{request.headers['Token'].inspect}"
+
     if ((authorization = request.headers['Token']) && authorization.include?('Key'))
       key = request.headers['Token'].gsub('Key ', '')
       logger.info "Request key: #{key}"
@@ -53,11 +61,8 @@ class DeviceApiController < ApplicationController
       logger.info "Calculated key: #{calculated}"
 
       unless (calculated == key.to_i)
-        render json: {status: -2}, status: :ok
-        return
+        @valid_key = true
       end
-    else
-      return
     end
   end
 
