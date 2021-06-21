@@ -54,6 +54,7 @@ class DeviceApiController < ApplicationController
 
       unless (calculated == key.to_i)
         render json: {status: -2}, status: :ok
+        return
       end
     end
   end
