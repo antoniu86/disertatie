@@ -13,6 +13,12 @@ class Device < ApplicationRecord
   validates :code, presence: true, length: { is: 12 }
   validates :network_id, presence: true
 
+  # constants
+  KEY = 10021986
+  CIRCLE = [*1..10]
+  SQUARE = [*11..20]
+  TRIANGLE = [*21..30]
+
   # soil humidity
 
   def soil_humidity
@@ -45,5 +51,19 @@ class Device < ApplicationRecord
 
   def has_logs?
     !logs.empty?
+  end
+
+  # key
+
+  def self.calculate_key(circle, square, triangle)
+    (((KEY * triangle) / (square * circle)) / (triangle + circle - square)).abs.to_i
+  end
+
+  def self.generate_key
+    circle = CIRCLE.sample
+    square = SQUARE.sample
+    triangle = TRIANGLE.sample
+
+    [circle, square, triangle, (((KEY * triangle) / (square * circle)) / (triangle + circle - square)).abs.to_i]
   end
 end
