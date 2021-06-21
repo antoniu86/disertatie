@@ -56,6 +56,8 @@ class DeviceApiController < ApplicationController
         render json: {status: -2}, status: :ok
         return
       end
+    else
+      return
     end
   end
 
