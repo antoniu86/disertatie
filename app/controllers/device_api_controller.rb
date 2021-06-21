@@ -60,7 +60,7 @@ class DeviceApiController < ApplicationController
 
       logger.info "Calculated key: #{calculated}"
 
-      unless (calculated == key.to_i)
+      if (calculated == key.to_i)
         @valid_key = true
       end
     end
