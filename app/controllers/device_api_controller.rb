@@ -85,6 +85,7 @@ class DeviceApiController < ApplicationController
   # log
 
   def log_after_action
+    logger.info "create log entry"
     Log.create(user_id: @user_id, device_id: @device_id, content: {received: @received, sent: @sent}.to_json)
   end
 end
