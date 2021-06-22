@@ -7,7 +7,7 @@ class DeviceApiController < ApplicationController
   before_action :log_request
   before_action :validate_request
 
-  after_action :close_database_connection
+  #after_action :close_database_connection
 
   def update
     unless @valid_key
