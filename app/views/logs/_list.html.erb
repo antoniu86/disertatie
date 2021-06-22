@@ -4,8 +4,14 @@
       <b><%= log.created_at.strftime("%d/%m/%Y - %H:%M:%S") %></b>
       <br>
       Device: <%= link_to log.device.name, {controller: 'device', action: 'show', id: log.device_id} %> - Network: <%= link_to log.device.network.name, {controller: 'network', action: 'show', id: log.device.network_id} %>
-      <br>
-      Information receive: <%= log.content %>
+      <hr>
+      <% if log.content %>
+        <code>
+          <%= JSON.pretty_generate(JSON.parse(log.content)) %>
+        </code>
+      <% else %>
+        no content
+      <% end %>
     </li>
   <% end %>
 </ul>
