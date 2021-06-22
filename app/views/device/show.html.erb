@@ -50,7 +50,7 @@
   <hr>
 
   <% if @device.has_logs? %>
-    <%= render partial: 'logs/list', locals: {logs: @device.logs.order('id desc')} %>
+    <%= render partial: 'logs/list' %>
   <% else %>
     <div class="alert alert-secondary" role="alert">
       There no log entries for this device.

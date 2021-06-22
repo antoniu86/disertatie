@@ -7,5 +7,9 @@
     <hr>
   </div>
 
-  <%= render partial: 'list', locals: {logs: current_user.logs.order('id desc') } %>
+  <p>
+    Total entries: <%= @logs_count %>
+  </p>
+
+  <%= render partial: 'list' %>
 </div>

@@ -6,6 +6,9 @@ class DeviceController < ApplicationController
 
   def show
     device
+
+    @logs = @device.logs.order('id desc').paginate(page: params[:page])
+    @logs_count = @device.logs.count
   end
 
   # add

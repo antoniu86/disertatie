@@ -4,4 +4,7 @@ class Log < ApplicationRecord
 
   # device
   belongs_to :device
+
+  # pagination
+  self.per_page = 20
 end

@@ -1,7 +1,7 @@
 <ul class="list-group">
-  <% logs.each do |log| %>
+  <% @logs.each do |log| %>
     <li class="list-group-item">
-      <b><%= log.created_at.strftime("%d/%m/%y - %H:%M %Z") %></b>
+      <b><%= log.created_at.strftime("%d/%m/%Y - %H:%M:%S") %></b>
       <br>
       Device: <%= link_to log.device.name, {controller: 'device', action: 'show', id: log.device_id} %> - Network: <%= link_to log.device.network.name, {controller: 'network', action: 'show', id: log.device.network_id} %>
       <br>
@@ -9,3 +9,7 @@
     </li>
   <% end %>
 </ul>
+
+<div class="mt-3">
+  <%= will_paginate @logs %>
+</div>
