@@ -8,4 +8,10 @@ class Network < ApplicationRecord
   # validations
   validates_length_of :name, maximum: 20 , allow_blank: true
   validates_length_of :password, maximum: 20 , allow_blank: true
+
+  # devices
+
+  def has_devices?
+    !devices.empty?
+  end
 end

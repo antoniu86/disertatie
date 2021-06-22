@@ -2,6 +2,12 @@ class NetworkController < ApplicationController
   before_action :authenticate_user!
   before_action :common
 
+  # show
+
+  def show
+    network
+  end
+
   # add
 
   def add

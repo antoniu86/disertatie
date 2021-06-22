@@ -1,7 +1,8 @@
 <table class="table table-hover">
   <thead>
     <th>Name</th>
-    <th width="100" class="text-right">Actions</th>
+    <th width="50" class="text-center">Devices</th>
+    <th width="150" class="text-right">Actions</th>
   </thead>
 
   <tbody>
@@ -11,7 +12,12 @@
           <%= network.name %>
         </td>
 
+        <td class="text-center">
+          <%= network.devices.count %>
+        </td>
+
         <td align="right">
+          <%= link_to (image_tag "icons/card-list.svg"),  {controller: 'network', action: 'show', id: network.id}, class: 'mr-2' %>
           <%= link_to (image_tag "icons/pencil.svg"),  {controller: 'network', action: 'edit', id: network.id}, class: 'mr-2' %>
           <%= link_to (image_tag "icons/trash.svg"), {controller: 'network', action: 'delete', id: network.id}, onclick: 'confirm_delete(this); return false;' %>
         </td>
