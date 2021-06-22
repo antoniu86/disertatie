@@ -7,18 +7,26 @@ class DeviceApiController < ApplicationController
   before_action :log_request
   before_action :validate_request
 
-  #after_action :close_database_connection
+  after_action :log_after_action
 
   def update
+    @user_id = 0
+    @device_id = 0
+    @received = {params: params}
+
     unless @valid_key
+      @sent = {code: params[:code], message: 'Invalid key'}
       render json: {status: -2}, status: :ok
       return
     end
 
     unless (device = Device.where(code: params[:code]).first)
-      Log.create(user_id: 0, device_id: 0, content: {code: params[:code], message: 'no device registered with this code'}.to_json)
-      render json: {status: 0}, status: :ok
+      @sent = {status: 0, message: "Device does not exist in the system."}
+      render json: @sent, status: :ok
     else
+      @user_id = device.user_id
+      @device_id = device.id
+
       humidity = params[:humidity] || 0
       level = params[:level] || 0
       temperature = params[:temperature] || 0
@@ -29,16 +37,18 @@ class DeviceApiController < ApplicationController
 
       to_water = device.marked_to_water?
 
-      Log.create(user_id: device.user_id, device_id: device.id, content: {code: params[:code], humidity: humidity, level: level, temperature: temperature}.to_json)
+      @received[:data] = {code: params[:code], humidity: humidity, level: level, temperature: temperature}
 
       if to_water
         updates[:watered_at] = Time.now
       end
 
       if device.update(updates)
-        render json: {status: 1, ci: ci, sq: sq, tr: tr, key: key, netname: device.network.name, netpass: device.network.password, water: to_water, limit: device.water_at}, status: :ok
+        @sent = {status: 1, ci: ci, sq: sq, tr: tr, key: key, netname: device.network.name, netpass: device.network.password, water: to_water, limit: device.water_at}
+        render json: @sent, status: :ok
       else
-        render json: {status: -1}, status: :ok
+        @sent = {status: -1, message: "Device update failed"}
+        render json: @sent, status: :ok
       end
     end
   end
@@ -72,10 +82,9 @@ class DeviceApiController < ApplicationController
     logger.info "request params: #{params.inspect}"
   end
 
-  # close database connection
+  # log
 
-  def close_database_connection
-    logger.info "Closing DB connection"
-    ActiveRecord::Base.connection.close
+  def log_after_action
+    Log.create(user_id: @user_id, device_id: @device_id, content: {received: @received, sent: @sent}.to_json)
   end
 end
