@@ -6,8 +6,9 @@ class Network < ApplicationRecord
   has_many :devices
 
   # validations
-  validates_length_of :name, maximum: 20 , allow_blank: true
-  validates_length_of :password, maximum: 20 , allow_blank: true
+  validates :name, presence: true
+  validates_length_of :ssid, maximum: 20
+  validates_length_of :password, maximum: 20
 
   # devices
 

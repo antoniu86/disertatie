@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_27_081241) do
+ActiveRecord::Schema.define(version: 2021_06_27_171811) do
 
   create_table "alexa_login_keys", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -65,12 +65,13 @@ ActiveRecord::Schema.define(version: 2021_06_27_081241) do
   end
 
   create_table "networks", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name", limit: 20, null: false
+    t.string "name", null: false
     t.string "password", limit: 20, null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
+    t.string "ssid", limit: 20, null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|

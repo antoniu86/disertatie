@@ -45,7 +45,7 @@ class DeviceApiController < ApplicationController
       end
 
       if device.update(updates)
-        @sent = {status: 1, ci: ci, sq: sq, tr: tr, key: key, netname: device.network.name, netpass: device.network.password, pomp: start_pomp, duration: device.duration, limit: device.water_at}
+        @sent = {status: 1, ci: ci, sq: sq, tr: tr, key: key, netname: device.network.ssid, netpass: device.network.password, pomp: start_pomp, duration: device.duration, limit: device.water_at}
         render json: @sent, status: :ok
       else
         @sent = {status: -1, message: "Device update failed"}
