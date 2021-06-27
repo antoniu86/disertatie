@@ -28,7 +28,9 @@
   </head>
 
   <body class="<%= params[:controller].gsub('/','-') %>-<%= params[:action] %>">
-    <%= yield %>
+    <div>
+      <%= yield %>
+    </div>
 
     <%= render partial: 'layouts/javascript' %>
   </body>

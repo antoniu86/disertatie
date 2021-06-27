@@ -1,6 +1,6 @@
 <%= render partial: 'layouts/navbar' %>
 
-<div class="container bg-light mt-2 mb-4 p-4">
+<div class="container bg-light p-4">
   <div class="page-header">
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
@@ -104,7 +104,7 @@
 
   <p>If you want to delete your account enter "delete my account" in the field below and click the delete button.</p>
 
-  <%= form_with url: "/account/delete", id: 'delete_account_form', class: 'form-inline mb-5' do %>
+  <%= form_with url: "/account/delete", id: 'delete_account_form', class: 'form-inline mb-2' do %>
     <div class="form-group mb-2 mr-2">
       <%= label_tag 'delete_account_text', 'Delete your account phrase:', class: 'sr-only' %>
       <%= text_field_tag 'delete_account_text', nil, class: 'form-control', placeholder: 'delete my account' %>
