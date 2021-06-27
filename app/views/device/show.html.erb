@@ -30,7 +30,7 @@
         <br>
         <b>Pump running duration:</b> <%= @device.duration %> seconds
         <br>
-        <b>Network:</b> <%= @device.network.name %>
+        <b>Network:</b> <%= link_to @device.network.name, {controller: 'network', action: 'show', id: @device.network_id} %>
         <br>
         <b>Description:</b> <%= @device.description %>
       </div>
@@ -41,8 +41,6 @@
         <b>Room temperature:</b> <%= @device.temperature %>&#8451;
         <br>
         <b>Room humidity:</b> <%= @device.humidity %>%
-        <br>
-        <b>Water level:</b> <%= @device.level %>
         <br>
         <b>Last watered at:</b> <%= @device.watered_at %>
       </div>

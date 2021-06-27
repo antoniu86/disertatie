@@ -46,7 +46,7 @@
                 <br>
                 <b>Pump running duration:</b> <%= device.duration %> seconds
                 <br>
-                <b>Network:</b> <%= device.network.name %>
+                <b>Network:</b> <%= link_to device.network.name, {controller: 'network', action: 'show', id: device.network_id} %>
                 <br>
                 <b>Description:</b> <%= device.description %>
               </div>

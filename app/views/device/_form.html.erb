@@ -23,8 +23,8 @@
 
 <div class="form-group">
   <%= label_tag 'device[duration]', 'Pump running duration (seconds):' %>
-  <%= select_tag 'device[duration]', options_for_select((1..10), selected: ((params[:device][:duration] if params[:duration]) || @device&.duration || 5)), class: 'form-control' %>
-  <small id="emailHelp" class="form-text text-muted">This value is used by the device to know for how many seconds it will keep the pump running on manual start.</small>
+  <%= select_tag 'device[duration]', options_for_select((4..15), selected: ((params[:device][:duration] if params[:duration]) || @device&.duration || 5)), class: 'form-control' %>
+  <small id="emailHelp" class="form-text text-muted">This value is used by the device to know for how many seconds it will keep the pump running on manual start. 4 seconds is about 50 ml.</small>
 </div>
 
 <div class="form-group">
