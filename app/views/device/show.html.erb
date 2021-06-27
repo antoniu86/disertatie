@@ -26,9 +26,11 @@
       <div class="col">
         <b>Product code:</b> <%= @device.code %>
         <br>
-        <b>Network:</b> <%= @device.network.name %>
+        <b>Water at soil humidity of:</b> <%= @device.water_at %>%
         <br>
-        <b>Water at soil humidity of:</b> <%= @device.water_at %>
+        <b>Pump running duration:</b> <%= @device.duration %> seconds
+        <br>
+        <b>Network:</b> <%= @device.network.name %>
         <br>
         <b>Description:</b> <%= @device.description %>
       </div>
@@ -36,9 +38,11 @@
       <div class="col">
         <b>Soil humidity:</b> <%= @device.soil_humidity %>%
         <br>
-        <b>Water level:</b> <%= @device.level %>
+        <b>Room temperature:</b> <%= @device.temperature %>&#8451;
         <br>
-        <b>Temperature:</b> <%= @device.temperature %>
+        <b>Room humidity:</b> <%= @device.humidity %>%
+        <br>
+        <b>Water level:</b> <%= @device.level %>
         <br>
         <b>Last watered at:</b> <%= @device.watered_at %>
       </div>

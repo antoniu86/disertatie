@@ -1,8 +1,3 @@
-html,
-body {
-    height: 100%;
-}
-
 a, a:hover, a:focus {
     color: #90cc03ff;
 }
@@ -23,7 +18,9 @@ body {
     background-image: url("bg.png");
 }
 
-.container {}
+body > .container {
+    margin-bottom: 40px;
+}
 
 .container .page-header .pull-right {
     float: right;

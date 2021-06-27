@@ -27,24 +27,25 @@ class DeviceApiController < ApplicationController
       @user_id = device.user_id
       @device_id = device.id
 
-      humidity = params[:humidity] || 0
-      level = params[:level] || 0
+      soil = params[:soil] || 0
       temperature = params[:temperature] || 0
+      humidity = params[:humidity] || 0
+      level = params[:level] || 0 # not having this sensor yet, but ready for when data is received
 
-      updates = {status: true, humidity: humidity, level: level, temperature: temperature, water: false}
+      updates = {status: true, soil: soil, temperature: temperature, humidity: humidity, water: false, level: level}
 
       ci, sq, tr, key = Device.generate_key
 
-      to_water = device.marked_to_water?
+      start_pomp = device.marked_to_water?
 
-      @received[:data] = {code: params[:code], humidity: humidity, level: level, temperature: temperature}
+      @received[:data] = {code: params[:code], soil: soil, temperature: temperature, humidity: humidity, level: level}
 
-      if to_water
+      if start_pomp
         updates[:watered_at] = Time.now
       end
 
       if device.update(updates)
-        @sent = {status: 1, ci: ci, sq: sq, tr: tr, key: key, netname: device.network.name, netpass: device.network.password, water: to_water, limit: device.water_at}
+        @sent = {status: 1, ci: ci, sq: sq, tr: tr, key: key, netname: device.network.name, netpass: device.network.password, pomp: start_pomp, duration: device.duration, limit: device.water_at}
         render json: @sent, status: :ok
       else
         @sent = {status: -1, message: "Device update failed"}

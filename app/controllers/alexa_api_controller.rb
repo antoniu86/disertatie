@@ -7,8 +7,6 @@ class AlexaApiController < ApplicationController
   before_action :log_request
   before_action :validate_request
 
-  #after_action :close_database_connection
-
   # get - check plants
 
   def check_plants
@@ -20,7 +18,7 @@ class AlexaApiController < ApplicationController
       render json: {count: count}, status: :ok
     else
       devices.each do |device|
-        list << "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%; "
+        list << "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%, room temperature of #{device.temperature} celsius degrees, room humidity of #{device.humidity}%; "
         count = count + 1
       end
 
@@ -39,7 +37,7 @@ class AlexaApiController < ApplicationController
       unless device = @user.devices.where(name: device_name).first
         render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
       else
-        message = "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%, "
+        message = "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%, room temperature of #{device.temperature} celsius degrees, room humidity if #{device.humidity}%, "
 
         if device.watered_at
           message = message + " the device last watered at #{device.watered_at}"
@@ -68,6 +66,23 @@ class AlexaApiController < ApplicationController
     end
   end
 
+  # post - check plant settings
+
+  def check_plant_settings
+    params.permit!
+
+    unless device_name = params[:slots][:name]
+      render json: {status: false, message: 'Missing parameter on request'}, status: :ok
+    else
+      unless device = @user.devices.where(name: device_name).first
+        render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
+      else
+        message = "Device name: #{device.name}; Settings: minimum soil humidity set to be #{device.soil_humidity}%, pomp set to run for #{device.duration} seconds"
+        render json: {status: true, message: message}, status: :ok
+      end
+    end
+  end
+
   # post - set plant minimum humidity
 
   def set_plant_humidity
@@ -84,6 +99,27 @@ class AlexaApiController < ApplicationController
         else
           device.update(water_at: device_water_at)
           render json: {status: true, message: "The minimum level of soil humidity was changed to #{device_water_at}% for #{device_name}"}, status: :ok
+        end
+      end
+    end
+  end
+
+  # post - set plant pomp running duration
+
+  def set_plant_duration
+    params.permit!
+
+    unless ((device_name = params[:slots][:name]) && (pomp_duration = params[:slots][:duration].to_i))
+      render json: {status: false, message: 'Missing parameter on request'}, status: :ok
+    else
+      unless device = @user.devices.where(name: device_name).first
+        render json: {status: false, message: "No device found with the name: #{device_name}"}, status: :ok
+      else
+        if pomp_duration > 10
+          render json: {status: false, message: "You cannot have a higher value than 10 seconds"}, status: :ok
+        else
+          device.update(duration: pomp_duration)
+          render json: {status: true, message: "The pomp running duration was changed to #{device_duration} seconds for #{device_name}"}, status: :ok
         end
       end
     end
@@ -144,12 +180,5 @@ class AlexaApiController < ApplicationController
 
   def log_request
     logger.info "request params: #{params.inspect}"
-  end
-
-  # close database connection
-
-  def close_database_connection
-    logger.info "Closing DB connection"
-    ActiveRecord::Base.connection.close
   end
 end

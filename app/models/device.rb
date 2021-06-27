@@ -12,6 +12,7 @@ class Device < ApplicationRecord
   validates :name, presence: true
   validates :code, presence: true, length: { is: 12 }
   validates :network_id, presence: true
+  validates :duration, presence: true
 
   # constants
   KEY = 10021986
@@ -22,7 +23,7 @@ class Device < ApplicationRecord
   # soil humidity
 
   def soil_humidity
-    (humidity/50)*100
+    soil
   end
 
   # check connected
