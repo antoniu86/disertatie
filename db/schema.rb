@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_27_171811) do
+ActiveRecord::Schema.define(version: 2021_06_29_082258) do
 
   create_table "alexa_login_keys", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2021_06_27_171811) do
     t.float "temperature", default: 0.0, null: false
     t.boolean "water", default: false
     t.datetime "watered_at"
-    t.integer "water_at", default: 0
+    t.integer "water_at", default: 20
     t.integer "soil", default: 0
     t.integer "duration", default: 5, null: false
     t.index ["network_id"], name: "index_devices_on_network_id"
