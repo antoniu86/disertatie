@@ -119,7 +119,7 @@ class AlexaApiController < ApplicationController
           render json: {status: false, message: "You cannot have a higher value than 10 seconds"}, status: :ok
         else
           device.update(duration: pomp_duration)
-          render json: {status: true, message: "The pomp running duration was changed to #{device_duration} seconds for #{device_name}"}, status: :ok
+          render json: {status: true, message: "The pomp running duration was changed to #{pomp_duration} seconds for #{device_name}"}, status: :ok
         end
       end
     end
@@ -173,6 +173,11 @@ class AlexaApiController < ApplicationController
       if (alexa_token = AlexaToken.where(access: token).first)
         @user = alexa_token.user
       end
+    end
+
+    unless @user
+      render nothing: true, status: :unauthorized
+      return
     end
   end
 
