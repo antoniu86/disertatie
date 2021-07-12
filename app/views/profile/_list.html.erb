@@ -28,7 +28,7 @@
                 <br>
                 <b>Room humidity:</b> <%= device.humidity %>%
                 <br>
-                <b>Last watered at:</b> <%= device.watered_at %>
+                <b>Last watered at:</b> <%= device.watered_at&.strftime("%d/%m/%Y - %H:%M:%S") %>
               </div>
             </div>
           </div>

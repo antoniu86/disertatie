@@ -18,7 +18,16 @@ class AlexaApiController < ApplicationController
       render json: {count: count}, status: :ok
     else
       devices.each do |device|
-        list << "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%, room temperature of #{device.temperature} celsius degrees, room humidity of #{device.humidity}%; "
+        message = "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%, room temperature of #{device.temperature} celsius degrees, room humidity of #{device.humidity}%, "
+
+        if device.watered_at
+          message = message + " the device last watered at #{device.watered_at.strftime("%d %B %Y at %H:%M")}; "
+        else
+          message = message + " the device was never started; "
+        end
+
+        list << message
+
         count = count + 1
       end
 
@@ -40,7 +49,7 @@ class AlexaApiController < ApplicationController
         message = "Device name: #{device.name}, has soil humidity of #{device.soil_humidity}%, room temperature of #{device.temperature} celsius degrees, room humidity if #{device.humidity}%, "
 
         if device.watered_at
-          message = message + " the device last watered at #{device.watered_at}"
+          message = message + " the device last watered at #{device.watered_at.strftime("%d %B %Y at %H:%M")}"
         else
           message = message + " the device was never started"
         end
