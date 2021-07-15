@@ -53,6 +53,7 @@ class AlexaApiController < ApplicationController
         else
           message = message + " the device was never started"
         end
+
         render json: {status: true, message: message}, status: :ok
       end
     end
